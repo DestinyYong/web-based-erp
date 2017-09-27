@@ -5,7 +5,7 @@ spring:
     name: web-based-erp
   datasource:
       name: erp-db
-      url: jdbc:mysql://127.0.0.1:3306/db_erp?useSSL=false&useUnicode=true&characterEncoding=utf8
+      url: jdbc:mysql://120.78.91.69:3306/db_erp?useSSL=false&useUnicode=true&characterEncoding=utf8
       username: root
       password: passw0rd
       driver-class-name: com.mysql.jdbc.Driver
