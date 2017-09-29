@@ -1,4 +1,114 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.uic.webbasederp.mapper.EmployeeMapper" >
+    <resultMap id="BaseResultMap" type="com.uic.webbasederp.domain.po.Employees" >
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <result column="name" property="name" jdbcType="VARCHAR" />
+        <result column="gender" property="gender" jdbcType="VARCHAR" />
+        <result column="department" property="department" jdbcType="VARCHAR" />
+        <result column="position" property="position" jdbcType="VARCHAR" />
+        <result column="salary" property="salary" jdbcType="DOUBLE" />
+        <result column="phone_number" property="phoneNumber" jdbcType="VARCHAR" />
+        <result column="address" property="address" jdbcType="VARCHAR"/>
+        <result column="id_card" property="IDCard" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        id, name, gender, department, position, salary, phone_number, address, id_card
+    </sql>
+
+    <insert id="saveEmployee" parameterType="Employees"
+            useGeneratedKeys="true" keyProperty="id">
+        insert into erp_employee
+        <trim prefix="(" suffix=")">
+            <if test="name != null">
+                name,
+            </if>
+            <if test="gender != null">
+                gender,
+            </if>
+            <if test="department != null">
+                department,
+            </if>
+            <if test="position != null">
+                position,
+            </if>
+            <if test="salary != null">
+                salary,
+            </if>
+            <if test="phoneNumber != null">
+                phone_number,
+            </if>
+            <if test="address != null">
+                address,
+            </if>
+            <if test="IDCard != null">
+                id_card
+            </if>
+        </trim>
+
+        <trim prefix="values (" suffix=")" >
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="gender != null">
+                #{gender,jdbcType=VARCHAR},
+            </if>
+            <if test="department != null">
+                #{department,jdbcType=VARCHAR},
+            </if>
+            <if test="position != null">
+                #{position,jdbcType=VARCHAR},
+            </if>
+            <if test="salary != null">
+                #{salary,jdbcType=DOUBLE},
+            </if>
+            <if test="phoneNumber != null">
+                #{phoneNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="address != null">
+                #{address,jdbcType=VARCHAR},
+            </if>
+            <if test="IDCard != null">
+                #{IDCard,jdbcType=VARCHAR}
+            </if>
+        </trim>
+    </insert>
+
+    <select id="getInformation" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from erp_employee limit #{0},15
+    </select>
+
+    <update id="updateInfomation" parameterType="Employees">
+        update erp_employee
+        <set>
+            <if test="name != null">
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="gender != null">
+                gender = #{gender,jdbcType=TINYINT},
+            </if>
+            <if test="department != null">
+                department = #{department,jdbcType=VARCHAR},
+            </if>
+            <if test="position != null">
+                position = #{position,jdbcType=VARCHAR},
+            </if>
+            <if test="salary != null">
+                salary = #{salary,jdbcType=DOUBLE},
+            </if>
+            <if test="phoneNumber != null">
+                phone_number = #{phoneNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="address != null">
+                address = #{address,jdbcType=VARCHAR},
+            </if>
+            <if test="IDCard != null">
+                id_card = #{IDCard,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
 </mapper>

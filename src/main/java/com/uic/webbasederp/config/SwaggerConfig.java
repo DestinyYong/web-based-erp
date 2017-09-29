@@ -27,10 +27,8 @@ public class SwaggerConfig {
 
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-                .title("API文档构建Restful Api")
-                .description("更多Spring Boot相关文章请关注：http://www.xialeme.com/")
-                .termsOfServiceUrl("http://www.xialeme.com/")
-                .contact("zjcjava@163.com")
+                .title("WebBased ERP System API")
+                .description("UIC 2017 FYP")
                 .version("1.0")
                 .build();
     }

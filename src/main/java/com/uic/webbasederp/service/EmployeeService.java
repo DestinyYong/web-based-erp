@@ -1,8 +1,13 @@
 package com.uic.webbasederp.service;
 
-import com.uic.webbasederp.domain.po.Employee;
+import com.uic.webbasederp.domain.po.Employees;
+import com.uic.webbasederp.domain.vo.EmployeeVo;
+
+import java.util.List;
 
 public interface EmployeeService {
-    Employee getInfomation(int eId);
-    void saveInfomation(int eId);
+    int saveEmployee(Employees employees);
+    List<Employees> getInfomation(int page);
+    void updateInfomation(Employees employees);
+    void removeEmplyee(int id);
 }
