@@ -17,8 +17,14 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public boolean isRight(int employeeId, String password) {
-        return false;
+    public Integer isRight(int employeeId, String password) {
+        if(userMapper.isRight(employeeId,password) != null){
+            return userMapper.isRight(employeeId,password);
+        }
+        else{
+            return -1;
+        }
+
     }
 
     @Override
@@ -27,7 +33,7 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public void updateAuthority(int employeeId) {
-
+    public void updateAuthority(int employeeId, int authority) {
+        userMapper.updateAuthority(employeeId, authority);
     }
 }
