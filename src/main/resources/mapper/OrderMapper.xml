@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.uic.webbasederp.mapper.OrderMapper" >
+    <resultMap id="BaseResultMap" type="com.uic.webbasederp.domain.po.Order" >
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <result column="order_id" property="orderId" jdbcType="INTEGER" />
+        <result column="customer_id" property="customerId" jdbcType="INTEGER" />
+        <result column="delivery_time" property="deliveryTime" jdbcType="VARCHAR" />
+        <result column="latest_delivery_time" property="latestDeliveryTime" jdbcType="VARCHAR" />
+        <result column="discount" property="discount" jdbcType="DOUBLE" />
+        <result column="total_order_price" property="totalOrderPrice" jdbcType="DOUBLE" />
+        <result column="state" property="state" jdbcType="INTEGER"/>
+        <result column="create_time" property="createTime" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        id, order_id, customer_id, delivery_time, latest_delivery_time, discount, total_order_price, state, create_time
+    </sql>
+
+    <insert id="saveOrder" parameterType="Order"
+            useGeneratedKeys="true" keyProperty="id">
+        insert into erp_order
+        <trim prefix="(" suffix=")">
+            <if test="orderId != null">
+                order_id,
+            </if>
+            <if test="customerId != null">
+                customer_id,
+            </if>
+            <if test="deliveryTime != null">
+                delivery_time,
+            </if>
+            <if test="latestDeliveryTime != null">
+                latest_delivery_time,
+            </if>
+            <if test="discount != null">
+                discount,
+            </if>
+            <if test="totalOrderPrice != null">
+                total_order_price,
+            </if>
+            <if test="state != null">
+                state,
+            </if>
+            <if test="createTime != null">
+                create_time
+            </if>
+        </trim>
+
+        <trim prefix="values (" suffix=")" >
+            <if test="orderId != null">
+                #{orderId,jdbcType=INTEGER},
+            </if>
+            <if test="customerId != null">
+                #{customerId,jdbcType=INTEGER},
+            </if>
+            <if test="deliveryTime != null">
+                #{deliveryTime,jdbcType=VARCHAR},
+            </if>
+            <if test="latestDeliveryTime != null">
+                #{latestDeliveryTime,jdbcType=VARCHAR},
+            </if>
+            <if test="discount != null">
+                #{discount,jdbcType=DOUBLE},
+            </if>
+            <if test="totalOrderPrice != null">
+                #{totalOrderPrice,jdbcType=DOUBLE},
+            </if>
+            <if test="state != null">
+                #{state,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=VARCHAR}
+            </if>
+        </trim>
+    </insert>
+
+    <select id="listOrder" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from erp_order limit #{0},15
+    </select>
+
+    <select id="getOrderNumber" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from erp_order where create_time &gt;= #{0} and create_time &lt;= #{1} ORDER BY create_time ASC
+    </select>
+
+    <update id="updateOrder" parameterType="Order">
+        update erp_order
+        <set>
+            <if test="customerId != null">
+                customer_id = #{customerId,jdbcType=INTEGER},
+            </if>
+            <if test="deliveryTime != null">
+                delivery_time = #{deliveryTime,jdbcType=VARCHAR},
+            </if>
+            <if test="latestDeliveryTime != null">
+                latest_delivery_time = #{latestDeliveryTime,jdbcType=VARCHAR},
+            </if>
+            <if test="discount != null">
+                discount = #{discount,jdbcType=DOUBLE},
+            </if>
+            <if test="totalOrderPrice != null">
+                total_order_price = #{totalOrderPrice,jdbcType=DOUBLE},
+            </if>
+            <if test="state != null">
+                state = #{state,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+</mapper>

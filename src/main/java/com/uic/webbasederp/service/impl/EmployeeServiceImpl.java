@@ -33,7 +33,7 @@ public class EmployeeServiceImpl implements EmployeeService{
      * @return Employees
      */
     @Override
-    public List<Employees> getInfomation(int page) {
+    public List<Employees> getInformation(int page) {
         List<Employees> employees = employeeMapper.getInformation((page-1)*15);
 
         return employees;
@@ -43,8 +43,8 @@ public class EmployeeServiceImpl implements EmployeeService{
      * update the information of employee
      */
     @Override
-    public void updateInfomation(Employees employees) {
-        employeeMapper.updateInfomation(employees);
+    public void updateInformation(Employees employees) {
+        employeeMapper.updateInformation(employees);
 
     }
 

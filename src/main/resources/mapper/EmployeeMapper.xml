@@ -81,7 +81,7 @@
         from erp_employee limit #{0},15
     </select>
 
-    <update id="updateInfomation" parameterType="Employees">
+    <update id="updateInformation" parameterType="Employees">
         update erp_employee
         <set>
             <if test="name != null">

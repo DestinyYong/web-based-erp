@@ -9,6 +9,6 @@ import java.util.List;
 public interface EmployeeMapper {
     void saveEmployee(Employees employees);
     List<Employees> getInformation(int page);
-    void updateInfomation(Employees employees);
+    void updateInformation(Employees employees);
     void removeEmplyee(int id);
 }
