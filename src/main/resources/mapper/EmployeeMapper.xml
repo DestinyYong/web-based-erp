@@ -81,6 +81,12 @@
         from erp_employee limit #{0},15
     </select>
 
+    <select id="getInformationById" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from erp_employee where id = #{arg0}
+    </select>
+
     <update id="updateInformation" parameterType="Employees">
         update erp_employee
         <set>

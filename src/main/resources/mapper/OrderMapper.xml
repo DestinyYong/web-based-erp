@@ -12,7 +12,14 @@
         <result column="state" property="state" jdbcType="INTEGER"/>
         <result column="create_time" property="createTime" jdbcType="VARCHAR"/>
     </resultMap>
-
+    <resultMap id="OrderNumberMap" type="com.uic.webbasederp.domain.vo.OrderNumberVo" >
+        <result column="months" property="months" jdbcType="VARCHAR" />
+        <result column="count" property="count" jdbcType="INTEGER" />
+    </resultMap>
+    <resultMap id="OrderPriceMap" type="com.uic.webbasederp.domain.vo.OrderPriceVo" >
+        <result column="months" property="months" jdbcType="VARCHAR" />
+        <result column="price" property="price" jdbcType="DOUBLE" />
+    </resultMap>
     <sql id="Base_Column_List" >
         id, order_id, customer_id, delivery_time, latest_delivery_time, discount, total_order_price, state, create_time
     </sql>
@@ -81,10 +88,12 @@
         from erp_order limit #{0},15
     </select>
 
-    <select id="getOrderNumber" resultMap="BaseResultMap">
-        select
-        <include refid="Base_Column_List"/>
-        from erp_order where create_time &gt;= #{0} and create_time &lt;= #{1} ORDER BY create_time ASC
+    <select id="getOrderNumber" resultMap="OrderNumberMap">
+        SELECT DATE_FORMAT(create_time,&apos;%Y%m&apos;) months, count(id) count from erp_order WHERE create_time &gt;= #{arg0} AND create_time &lt;= #{arg1} GROUP BY months
+    </select>
+
+    <select id="getOrderPrice" resultMap="OrderPriceMap">
+        SELECT DATE_FORMAT(create_time,&apos;%Y%m&apos;) months, sum(total_order_price) price from erp_order WHERE create_time &gt;= #{arg0} AND create_time &lt;= #{arg1} GROUP BY months
     </select>
 
     <update id="updateOrder" parameterType="Order">

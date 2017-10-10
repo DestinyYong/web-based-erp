@@ -2,6 +2,7 @@ package com.uic.webbasederp.service.impl;
 
 import com.uic.webbasederp.domain.po.Order;
 import com.uic.webbasederp.domain.vo.OrderNumberVo;
+import com.uic.webbasederp.domain.vo.OrderPriceVo;
 import com.uic.webbasederp.mapper.OrderMapper;
 import com.uic.webbasederp.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,8 +38,12 @@ public class OrderServiceImpl implements OrderService{
     }
 
     @Override
-    public OrderNumberVo getOrderNumber(String startDate, String endDate) throws Exception{
+    public List<OrderNumberVo> getOrderNumber(String startDate, String endDate) throws Exception{
+        return orderMapper.getOrderNumber(startDate, endDate);
+    }
 
-        return null;
+    @Override
+    public List<OrderPriceVo> getOrderPrice(String startDate, String endDate) throws Exception {
+        return orderMapper.getOrderPrice(startDate, endDate);
     }
 }

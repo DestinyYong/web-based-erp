@@ -1,7 +1,6 @@
 package com.uic.webbasederp.service.impl;
 
 import com.uic.webbasederp.domain.po.Employees;
-import com.uic.webbasederp.domain.vo.EmployeeVo;
 import com.uic.webbasederp.mapper.EmployeeMapper;
 import com.uic.webbasederp.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,5 +54,10 @@ public class EmployeeServiceImpl implements EmployeeService{
     @Override
     public void removeEmplyee(int id) {
 
+    }
+
+    @Override
+    public Employees getInformationById(int employeeId) {
+        return null;
     }
 }

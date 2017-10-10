@@ -8,6 +8,7 @@
         <result column="authority" property="authority" jdbcType="VARCHAR" />
     </resultMap>
 
+
     <insert id="saveUser" parameterType="User"
             useGeneratedKeys="true" keyProperty="id">
         insert into erp_user

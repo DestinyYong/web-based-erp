@@ -5,7 +5,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class OrderNumberVo {
-    private String months;
-    private Integer count;
+public class LoginVo {
+    private Integer employeeId;
+    private String password;
 }

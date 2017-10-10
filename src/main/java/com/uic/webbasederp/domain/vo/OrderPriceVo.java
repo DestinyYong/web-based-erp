@@ -5,7 +5,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class OrderNumberVo {
+public class OrderPriceVo {
     private String months;
-    private Integer count;
+    private Double price;
 }

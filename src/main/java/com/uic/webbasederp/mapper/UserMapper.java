@@ -1,6 +1,7 @@
 package com.uic.webbasederp.mapper;
 
 import com.uic.webbasederp.domain.po.User;
+import com.uic.webbasederp.domain.vo.UserVo;
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper

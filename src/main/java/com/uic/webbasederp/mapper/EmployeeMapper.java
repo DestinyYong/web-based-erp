@@ -11,4 +11,5 @@ public interface EmployeeMapper {
     List<Employees> getInformation(int page);
     void updateInformation(Employees employees);
     void removeEmplyee(int id);
+    Employees getInformationById(int employeeId);
 }
