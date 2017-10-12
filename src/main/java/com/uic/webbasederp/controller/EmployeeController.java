@@ -2,7 +2,6 @@ package com.uic.webbasederp.controller;
 
 import com.uic.webbasederp.domain.po.Employees;
 import com.uic.webbasederp.domain.po.User;
-import com.uic.webbasederp.domain.vo.EmployeeVo;
 import com.uic.webbasederp.service.EmployeeService;
 import com.uic.webbasederp.service.UserService;
 import com.uic.webbasederp.utilConst.CommonResultResponse;
@@ -19,13 +18,14 @@ import java.util.List;
 
 @RestController
 @EnableAutoConfiguration
+@RequestMapping(value = "/employee")
 public class EmployeeController {
     @Autowired
     private EmployeeService employeeService;
     @Autowired
     private UserService userService;
     @ApiOperation(value = "add a employee")
-    @RequestMapping(value="/employee",method = RequestMethod.POST)
+    @RequestMapping(value="/new",method = RequestMethod.POST)
     public ResponseEntity<CommonResultResponse<Integer>> saveEmployee(@RequestBody Employees employees) throws Exception{
         Integer employeeId = employeeService.saveEmployee(employees);
 
@@ -38,18 +38,18 @@ public class EmployeeController {
     }
 
     @ApiOperation(value = "list 15 employees")
-    @RequestMapping(value="/employee",method = RequestMethod.GET)
+    @RequestMapping(value="/show",method = RequestMethod.GET)
     public ResponseEntity<CommonResultResponse<List<Employees>>> listEmployee(@RequestParam Integer page) throws Exception{
-        List<Employees> employees = employeeService.getInfomation(page);
+        List<Employees> employees = employeeService.getInformation(page);
         CommonResultResponse<List<Employees>> responseBody = CommonResultResponse.buildSuccessCommonResultResponse(employees);
         responseBody.setMessage(ResponseMessage.SUCCESS);
         return ResponseEntity.status(HttpStatus.OK).body(responseBody);
     }
 
     @ApiOperation(value = "update one employee")
-    @RequestMapping(value="/employee/update",method = RequestMethod.POST)
+    @RequestMapping(value="/update",method = RequestMethod.POST)
     public ResponseEntity<CommonResultResponse> updateEmployee(@RequestBody Employees employees) throws Exception{
-        employeeService.updateInfomation(employees);
+        employeeService.updateInformation(employees);
         return ResponseHelper.success();
     }
 }

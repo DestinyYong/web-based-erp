@@ -1,16 +1,18 @@
-package com.uic.webbasederp.service;
+package com.uic.webbasederp.mapper;
 
 import com.uic.webbasederp.domain.po.Order;
 import com.uic.webbasederp.domain.vo.OrderNumberVo;
 import com.uic.webbasederp.domain.vo.OrderPriceVo;
+import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
 
-public interface OrderService {
+@Mapper
+public interface OrderMapper {
     void saveOrder(Order order);
     void updateOrder(Order order);
     List<Order> listOrder(int page);
     void removeOrder(int orderId);
-    List<OrderNumberVo> getOrderNumber(String startDate, String endDate) throws Exception;
-    List<OrderPriceVo> getOrderPrice(String startDate,String endDate) throws Exception;
+    List<OrderNumberVo> getOrderNumber(String startDate, String endDate);
+    List<OrderPriceVo> getOrderPrice(String startDate, String endDate);
 }

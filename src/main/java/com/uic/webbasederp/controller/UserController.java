@@ -2,6 +2,8 @@ package com.uic.webbasederp.controller;
 
 import com.uic.webbasederp.domain.po.Employees;
 import com.uic.webbasederp.domain.po.User;
+import com.uic.webbasederp.domain.vo.LoginVo;
+import com.uic.webbasederp.domain.vo.UserVo;
 import com.uic.webbasederp.service.UserService;
 import com.uic.webbasederp.utilConst.CommonResultResponse;
 import com.uic.webbasederp.utilConst.ResponseHelper;
@@ -22,8 +24,8 @@ public class UserController {
 
     @ApiOperation(value = "login and check user authority")
     @RequestMapping(value="/login",method = RequestMethod.POST)
-    public ResponseEntity<CommonResultResponse<Integer>> login(@RequestParam int employeeId, @RequestParam String password) throws Exception{
-        CommonResultResponse<Integer> responseBody = CommonResultResponse.buildSuccessCommonResultResponse(userService.isRight(employeeId,password));
+    public ResponseEntity<CommonResultResponse<UserVo>> login(@RequestBody LoginVo loginVo) throws Exception{
+        CommonResultResponse<UserVo> responseBody = CommonResultResponse.buildSuccessCommonResultResponse(userService.isRight(loginVo.getEmployeeId(),loginVo.getPassword()));
         responseBody.setMessage(ResponseMessage.SUCCESS);
         return ResponseEntity.status(HttpStatus.OK).body(responseBody);
     }
