@@ -1,0 +1,10 @@
+package com.uic.webbasederp.mapper;
+
+import com.uic.webbasederp.domain.po.Product;
+import org.apache.ibatis.annotations.Mapper;
+
+@Mapper
+public interface ProductMapper {
+    void saveProduct(Product product);
+
+}
