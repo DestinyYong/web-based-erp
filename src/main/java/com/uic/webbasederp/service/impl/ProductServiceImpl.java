@@ -105,4 +105,9 @@ public class ProductServiceImpl implements ProductService{
     public List<Product> getSubproductByProductID(int productId) {
         return productMapper.getSubProductByProductId(productId);
     }
+
+    @Override
+    public List<Product> getProduct(int page) {
+        return productMapper.getProduct((page-1)*15);
+    }
 }

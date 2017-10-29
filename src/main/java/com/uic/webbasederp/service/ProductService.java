@@ -10,4 +10,5 @@ public interface ProductService {
     void insertProduct(ProductVo productVo)throws Exception;
     List<Product> getSubProduct();
     List<Product> getSubproductByProductID(int productId);
+    List<Product> getProduct(int page);
 }

@@ -19,7 +19,7 @@
     </resultMap>
 
     <sql id="Base_Column_List" >
-        id, product_id, product_name, price, cost, type, product_length, product_width, size_of_box, min_storage_number, picture_address, state
+        id, product_id, product_name, price, cost, type, product_length, product_width, size_of_box, min_storage_number, picture_address, state,flag
     </sql>
     <insert id="saveProduct" parameterType="OrderProduct"
             useGeneratedKeys="true" keyProperty="id">
@@ -122,5 +122,11 @@
         select
         <include refid="Base_Column_List"/>
         from erp_product where product_id in (SELECT sub_product_id from erp_product_subproduct_relation where erp_product_subproduct_relation.product_id = #{arg0})
+    </select>
+
+    <select id="getProduct" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from erp_product where flag = 1 limit #{arg0},15
     </select>
 </mapper>
