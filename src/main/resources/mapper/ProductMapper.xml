@@ -15,6 +15,7 @@
         <result column="min_storage_number" property="minStorageNumber" jdbcType="INTEGER"/>
         <result column="picture_address" property="pictureAddress" jdbcType="VARCHAR"/>
         <result column="state" property="state" jdbcType="VARCHAR"/>
+        <result column="flag" property="flag" jdbcType="INTEGER"/>
     </resultMap>
 
     <sql id="Base_Column_List" >
@@ -58,7 +59,11 @@
                 picture_address,
             </if>
             <if test="state != null">
-                state
+                state,
+            </if>
+
+            <if test="flag != null">
+                flag
             </if>
 
         </trim>
@@ -98,8 +103,24 @@
                 #{pictureAddress,jdbcType=VARCHAR},
             </if>
             <if test="state != null">
-                #{state,jdbcType=VARCHAR}
+                #{state,jdbcType=VARCHAR},
             </if>
+            <if test="flag != null">
+                #{flag,jdbcType=INTEGER}
+            </if>
+
         </trim>
     </insert>
+
+    <select id="getSubProduct" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from erp_product where flag = 0
+    </select>
+
+    <select id="getSubProductByProductId" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from erp_product where product_id in (SELECT sub_product_id from erp_product_subproduct_relation where erp_product_subproduct_relation.product_id = #{arg0})
+    </select>
 </mapper>

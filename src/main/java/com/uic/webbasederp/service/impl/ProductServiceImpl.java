@@ -2,8 +2,10 @@ package com.uic.webbasederp.service.impl;
 
 import com.aliyun.oss.OSSClient;
 import com.uic.webbasederp.domain.po.Product;
+import com.uic.webbasederp.domain.po.ProductSubproductRelation;
 import com.uic.webbasederp.domain.vo.ProductVo;
 import com.uic.webbasederp.mapper.ProductMapper;
+import com.uic.webbasederp.mapper.ProductSubproductRelationMapper;
 import com.uic.webbasederp.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,6 +13,7 @@ import sun.misc.BASE64Decoder;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
+import java.util.List;
 import java.util.Random;
 
 @Service
@@ -18,6 +21,8 @@ public class ProductServiceImpl implements ProductService{
 
     @Autowired
     private ProductMapper productMapper;
+    @Autowired
+    private ProductSubproductRelationMapper productSubproductRelationMapper;
 
     public String savePicture(String base64Image, String fileType) throws Exception{
         String fileName;
@@ -72,7 +77,32 @@ public class ProductServiceImpl implements ProductService{
         product.setProductName(productVo.getProductName());
         product.setType(productVo.getType());
         product.setPictureAddress(savePicture(productVo.getBase64Image(),productVo.getFileType()));
+        product.setFlag(productVo.getFlag());
 
         productMapper.saveProduct(product);
+
+        if(productVo.getFlag() == 1){
+            if(productVo.getProductSubproductRelations() != null){
+                ProductSubproductRelation productSubproductRelation = new ProductSubproductRelation();
+                productSubproductRelation.setProductId(productVo.getProductId());
+                productSubproductRelation.setSubProductId(productVo.getProductId());
+                productSubproductRelationMapper.insertRelation(productSubproductRelation);
+            }else{
+                List<ProductSubproductRelation> productSubproductRelations = productVo.getProductSubproductRelations();
+                for(ProductSubproductRelation productSubproductRelation : productSubproductRelations){
+                    productSubproductRelationMapper.insertRelation(productSubproductRelation);
+                }
+            }
+        }
+    }
+
+    @Override
+    public List<Product> getSubProduct() {
+        return productMapper.getSubProduct();
+    }
+
+    @Override
+    public List<Product> getSubproductByProductID(int productId) {
+        return productMapper.getSubProductByProductId(productId);
     }
 }

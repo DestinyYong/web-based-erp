@@ -19,4 +19,5 @@ public class Product {
     private int minStorageNumber;
     private String pictureAddress;
     private String state;
+    private int flag;
 }
