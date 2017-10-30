@@ -85,7 +85,7 @@
     <select id="listOrder" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
-        from erp_order limit #{0},15
+        from erp_order limit #{arg0},15
     </select>
 
     <select id="getOrderNumber" resultMap="OrderNumberMap">

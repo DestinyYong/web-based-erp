@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.uic.webbasederp.mapper.ProductSubproductRelationMapper" >
+    <resultMap id="BaseResultMap" type="com.uic.webbasederp.domain.po.ProductSubproductRelation" >
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <result column="product_id" property="productId" jdbcType="INTEGER" />
+        <result column="sub_product_id" property="subProductId" jdbcType="INTEGER" />
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        id, product_id, sub_product_id
+    </sql>
+
+    <insert id="insertRelation" parameterType="ProductSubproductRelation"
+            useGeneratedKeys="true" keyProperty="id">
+        insert into erp_product_subproduct_relation
+        <trim prefix="(" suffix=")">
+            <if test="productId != null">
+                product_id,
+            </if>
+            <if test="subProductId != null">
+                sub_product_id
+            </if>
+        </trim>
+
+        <trim prefix="values (" suffix=")" >
+            <if test="productId != null">
+                #{productId,jdbcType=INTEGER},
+            </if>
+            <if test="subProductId != null">
+                #{subProductId,jdbcType=INTEGER}
+            </if>
+        </trim>
+    </insert>
+</mapper>

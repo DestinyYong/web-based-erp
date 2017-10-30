@@ -1,12 +1,16 @@
-package com.uic.webbasederp.domain.po;
+package com.uic.webbasederp.domain.vo;
 
+import com.uic.webbasederp.domain.po.ProductSubproductRelation;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
+
 @Getter
 @Setter
-public class Product {
-    private int id;
+public class ProductVo {
+    private String base64Image;
+    private String fileType;
     private int productId;
     private String productName;
     private double price;
@@ -17,7 +21,7 @@ public class Product {
     private double productHeight;
     private int sizeOfBox;
     private int minStorageNumber;
-    private String pictureAddress;
     private String state;
     private int flag;
+    private List<ProductSubproductRelation> productSubproductRelations;
 }
