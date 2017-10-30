@@ -55,4 +55,13 @@ public class OrderController {
         return ResponseEntity.status(HttpStatus.OK).body(responseBody);
     }
 
+    @ApiOperation(value = "analyze the order price")
+    @RequestMapping(value="/all",method = RequestMethod.GET)
+    public ResponseEntity<CommonResultResponse<List<Order>>> getOrder(@RequestParam int page) throws Exception{
+        List<Order> orders = orderService.listOrder(page);
+        CommonResultResponse<List<Order>> responseBody = CommonResultResponse.buildSuccessCommonResultResponse(orders);
+        responseBody.setMessage(ResponseMessage.SUCCESS);
+        return ResponseEntity.status(HttpStatus.OK).body(responseBody);
+    }
+
 }

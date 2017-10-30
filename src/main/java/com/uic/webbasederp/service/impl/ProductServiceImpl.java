@@ -7,15 +7,10 @@ import com.uic.webbasederp.domain.vo.ProductVo;
 import com.uic.webbasederp.mapper.ProductMapper;
 import com.uic.webbasederp.mapper.ProductSubproductRelationMapper;
 import com.uic.webbasederp.service.ProductService;
-<<<<<<< HEAD
-import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
-=======
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import sun.misc.BASE64Decoder;
->>>>>>> 7fc40cf1589ed5c5e13edc9eaefba9bdaa13efee
-
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.util.List;
