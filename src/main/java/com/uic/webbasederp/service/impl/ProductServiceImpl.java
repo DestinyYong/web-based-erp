@@ -3,10 +3,12 @@ package com.uic.webbasederp.service.impl;
 import com.aliyun.oss.OSSClient;
 import com.uic.webbasederp.domain.po.Product;
 import com.uic.webbasederp.service.ProductService;
+import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Random;
 
+@Service
 public class ProductServiceImpl implements ProductService{
     @Override
     public String savePicture(MultipartFile multipartFile) throws Exception{
