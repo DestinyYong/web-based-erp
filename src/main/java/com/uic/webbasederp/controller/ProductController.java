@@ -47,10 +47,17 @@ public class ProductController {
         return ResponseEntity.status(HttpStatus.OK).body(responseBody);
     }
 
-    @ApiOperation(value = "list all product")
+    @ApiOperation(value = "list current page product")
     @RequestMapping(value="/all",method = RequestMethod.GET)
     public ResponseEntity<CommonResultResponse<List<Product>>> getProduct(@RequestParam int page) throws Exception{
         CommonResultResponse<List<Product>> responseBody = CommonResultResponse.buildSuccessCommonResultResponse(productService.getProduct(page));
+        responseBody.setMessage(ResponseMessage.SUCCESS);
+        return ResponseEntity.status(HttpStatus.OK).body(responseBody);
+    }
+    @ApiOperation(value = "list all product")
+    @RequestMapping(method = RequestMethod.GET)
+    public ResponseEntity<CommonResultResponse<List<Product>>> getAllProduct() throws Exception{
+        CommonResultResponse<List<Product>> responseBody = CommonResultResponse.buildSuccessCommonResultResponse(productService.getAllProduct());
         responseBody.setMessage(ResponseMessage.SUCCESS);
         return ResponseEntity.status(HttpStatus.OK).body(responseBody);
     }

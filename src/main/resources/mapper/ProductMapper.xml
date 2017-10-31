@@ -129,4 +129,10 @@
         <include refid="Base_Column_List"/>
         from erp_product where flag = 1 limit #{arg0},15
     </select>
+
+    <select id="getAllProduct" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from erp_product where flag = 1
+    </select>
 </mapper>
