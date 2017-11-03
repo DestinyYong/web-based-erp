@@ -10,4 +10,5 @@ public interface WharehouseMapper {
     void addProductIntoWharehouse(Wharehouse wharehouse);
     void updateWharehouse(Wharehouse wharehouse);
     List<Wharehouse> listWhareHouse(int page);
+    Wharehouse listWhareHouseById(int productId);
 }

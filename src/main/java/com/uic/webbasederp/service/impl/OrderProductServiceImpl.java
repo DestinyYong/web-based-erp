@@ -24,11 +24,13 @@ public class OrderProductServiceImpl implements OrderProductService{
     public void saveOrderProduct(OrderProduct orderProduct) {
 
         List<Product> products = productMapper.getSubProductByProductId(orderProduct.getProductId());
+        Wharehouse dbWharehouse = wharehouseMapper.listWhareHouseById(orderProduct.getProductId());
 
         for(Product product : products){
             Wharehouse wharehouse = new Wharehouse();
             wharehouse.setProductId(product.getProductId());
-            wharehouse.setOrderNumber(orderProduct.getNumber());
+            wharehouse.setOrderNumber(dbWharehouse.getOrderNumber()+orderProduct.getNumber());
+            wharehouse.setAvailableNumber(dbWharehouse.getAvailableNumber()-orderProduct.getNumber());
             wharehouseMapper.updateWharehouse(wharehouse);
         }
         orderProductMapper.saveOrderProduct(orderProduct);
