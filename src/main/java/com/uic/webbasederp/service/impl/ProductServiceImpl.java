@@ -3,9 +3,11 @@ package com.uic.webbasederp.service.impl;
 import com.aliyun.oss.OSSClient;
 import com.uic.webbasederp.domain.po.Product;
 import com.uic.webbasederp.domain.po.ProductSubproductRelation;
+import com.uic.webbasederp.domain.po.Wharehouse;
 import com.uic.webbasederp.domain.vo.ProductVo;
 import com.uic.webbasederp.mapper.ProductMapper;
 import com.uic.webbasederp.mapper.ProductSubproductRelationMapper;
+import com.uic.webbasederp.mapper.WharehouseMapper;
 import com.uic.webbasederp.service.ProductService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +21,8 @@ import java.util.Random;
 @Service
 public class ProductServiceImpl implements ProductService{
 
+    @Autowired
+    private WharehouseMapper wharehouseMapper;
     @Autowired
     private ProductMapper productMapper;
     @Autowired
@@ -81,12 +85,30 @@ public class ProductServiceImpl implements ProductService{
 
         productMapper.saveProduct(product);
 
+        if(productVo.getFlag() == 0){
+            Wharehouse wharehouse = new Wharehouse();
+            wharehouse.setProductId(productVo.getProductId());
+            wharehouse.setMinStoreNumber(productVo.getMinStorageNumber());
+            wharehouse.setOrderNumber(0);
+            wharehouse.setAvailableNumber(0);
+            wharehouseMapper.addProductIntoWharehouse(wharehouse);
+        }
+
+
+
         if(productVo.getFlag() == 1){
             if(productVo.getProductSubproductRelations() != null){
                 ProductSubproductRelation productSubproductRelation = new ProductSubproductRelation();
                 productSubproductRelation.setProductId(productVo.getProductId());
                 productSubproductRelation.setSubProductId(productVo.getProductId());
                 productSubproductRelationMapper.insertRelation(productSubproductRelation);
+
+                Wharehouse wharehouse = new Wharehouse();
+                wharehouse.setProductId(productVo.getProductId());
+                wharehouse.setMinStoreNumber(productVo.getMinStorageNumber());
+                wharehouse.setOrderNumber(0);
+                wharehouse.setAvailableNumber(0);
+                wharehouseMapper.addProductIntoWharehouse(wharehouse);
             }else{
                 List<ProductSubproductRelation> productSubproductRelations = productVo.getProductSubproductRelations();
                 for(ProductSubproductRelation productSubproductRelation : productSubproductRelations){
