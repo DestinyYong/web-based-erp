@@ -48,4 +48,10 @@
         </trim>
     </insert>
 
+    <select id="getProductIdByOrderId" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from erp_order where order_id = #{arg0}
+    </select>
+
 </mapper>

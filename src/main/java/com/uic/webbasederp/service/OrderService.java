@@ -13,4 +13,5 @@ public interface OrderService {
     void removeOrder(int orderId);
     List<OrderNumberVo> getOrderNumber(String startDate, String endDate) throws Exception;
     List<OrderPriceVo> getOrderPrice(String startDate,String endDate) throws Exception;
+    void changeOrderState(int orderId, int state);
 }

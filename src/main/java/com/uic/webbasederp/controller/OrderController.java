@@ -64,4 +64,10 @@ public class OrderController {
         return ResponseEntity.status(HttpStatus.OK).body(responseBody);
     }
 
+    @ApiOperation(value = "change the order state")
+    @RequestMapping(value="/finish",method = RequestMethod.POST)
+    public ResponseEntity<CommonResultResponse> changeOrderState(@RequestParam int orderId) throws Exception{
+        orderService.changeOrderState(orderId,1);
+        return ResponseHelper.success();
+    }
 }

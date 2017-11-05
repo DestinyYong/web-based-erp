@@ -15,4 +15,6 @@ public interface OrderMapper {
     void removeOrder(int orderId);
     List<OrderNumberVo> getOrderNumber(String startDate, String endDate);
     List<OrderPriceVo> getOrderPrice(String startDate, String endDate);
+    void changeOrderState(int orderId, int state);
+
 }
