@@ -97,7 +97,7 @@ public class ProductServiceImpl implements ProductService{
 
 
         if(productVo.getFlag() == 1){
-            if(productVo.getProductSubproductRelations() != null){
+            if(productVo.getProductSubproductRelations().isEmpty()){
                 ProductSubproductRelation productSubproductRelation = new ProductSubproductRelation();
                 productSubproductRelation.setProductId(productVo.getProductId());
                 productSubproductRelation.setSubProductId(productVo.getProductId());
