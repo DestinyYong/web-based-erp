@@ -51,7 +51,7 @@
     <select id="getProductIdByOrderId" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
-        from erp_order where order_id = #{arg0}
+        from erp_order_product where order_id = #{arg0}
     </select>
 
 </mapper>
