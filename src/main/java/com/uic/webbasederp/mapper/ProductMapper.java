@@ -12,4 +12,5 @@ public interface ProductMapper {
     List<Product> getSubProductByProductId(int productId);
     List<Product> getProduct(int page);
     List<Product> getAllProduct();
+    Product getProductById(int productId);
 }

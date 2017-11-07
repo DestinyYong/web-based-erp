@@ -2,6 +2,7 @@ package com.uic.webbasederp.controller;
 
 import com.uic.webbasederp.domain.po.Order;
 import com.uic.webbasederp.domain.po.OrderProduct;
+import com.uic.webbasederp.domain.vo.CustomerOrderVo;
 import com.uic.webbasederp.domain.vo.OrderNumberVo;
 import com.uic.webbasederp.domain.vo.OrderPriceVo;
 import com.uic.webbasederp.domain.vo.OrderVo;
@@ -55,11 +56,20 @@ public class OrderController {
         return ResponseEntity.status(HttpStatus.OK).body(responseBody);
     }
 
-    @ApiOperation(value = "analyze the order price")
+    @ApiOperation(value = "list the order")
     @RequestMapping(value="/all",method = RequestMethod.GET)
-    public ResponseEntity<CommonResultResponse<List<Order>>> getOrder(@RequestParam int page) throws Exception{
-        List<Order> orders = orderService.listOrder(page);
-        CommonResultResponse<List<Order>> responseBody = CommonResultResponse.buildSuccessCommonResultResponse(orders);
+    public ResponseEntity<CommonResultResponse<List<CustomerOrderVo>>> getOrder() throws Exception{
+        List<CustomerOrderVo> orders = orderService.listOrder();
+        CommonResultResponse<List<CustomerOrderVo>> responseBody = CommonResultResponse.buildSuccessCommonResultResponse(orders);
+        responseBody.setMessage(ResponseMessage.SUCCESS);
+        return ResponseEntity.status(HttpStatus.OK).body(responseBody);
+    }
+
+    @ApiOperation(value = "get the customer order")
+    @RequestMapping(value="/customer",method = RequestMethod.GET)
+    public ResponseEntity<CommonResultResponse<List<CustomerOrderVo>>> getOrder(@RequestParam int customerId) throws Exception{
+        List<CustomerOrderVo> orders = orderService.listOrderByCustomerId(customerId);
+        CommonResultResponse<List<CustomerOrderVo>> responseBody = CommonResultResponse.buildSuccessCommonResultResponse(orders);
         responseBody.setMessage(ResponseMessage.SUCCESS);
         return ResponseEntity.status(HttpStatus.OK).body(responseBody);
     }

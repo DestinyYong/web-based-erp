@@ -11,7 +11,8 @@ import java.util.List;
 public interface OrderMapper {
     void saveOrder(Order order);
     void updateOrder(Order order);
-    List<Order> listOrder(int page);
+    List<Order> listOrder();
+    List<Order> listOrderByCustomerId(int customerId);
     void removeOrder(int orderId);
     List<OrderNumberVo> getOrderNumber(String startDate, String endDate);
     List<OrderPriceVo> getOrderPrice(String startDate, String endDate);

@@ -3,6 +3,7 @@ package com.uic.webbasederp.controller;
 import com.uic.webbasederp.domain.po.OrderProduct;
 import com.uic.webbasederp.domain.po.Wharehouse;
 import com.uic.webbasederp.domain.vo.OrderVo;
+import com.uic.webbasederp.domain.vo.WharehouseDetailVo;
 import com.uic.webbasederp.domain.vo.WharehouseVo;
 import com.uic.webbasederp.service.WharehouseService;
 import com.uic.webbasederp.utilConst.CommonResultResponse;
@@ -10,11 +11,9 @@ import com.uic.webbasederp.utilConst.ResponseHelper;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -33,5 +32,13 @@ public class WharehouseController {
         wharehouse.setAvailableNumber(wharehouseVo.getAvailableNumber());
         wharehouseService.updateWharehouse(wharehouse);
         return ResponseHelper.success();
+    }
+
+    @ApiOperation(value = "add product into wharehouse")
+    @RequestMapping(value="/all",method = RequestMethod.GET)
+    public ResponseEntity<CommonResultResponse<List<WharehouseDetailVo>>> showWharehouse(@RequestParam int page) throws Exception {
+        List<WharehouseDetailVo> wharehouseDetailVos = wharehouseService.listWhareHouse(page);
+        CommonResultResponse<List<WharehouseDetailVo>> responseBody = CommonResultResponse.buildSuccessCommonResultResponse(wharehouseDetailVos);
+        return ResponseEntity.status(HttpStatus.OK).body(responseBody);
     }
 }

@@ -85,7 +85,13 @@
     <select id="listOrder" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
-        from erp_order limit #{arg0},15
+        from erp_order order by state ASC
+    </select>
+
+    <select id="listOrderByCustomerId" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from erp_order where customer_id = #{arg0} order by state ASC
     </select>
 
     <select id="getOrderNumber" resultMap="OrderNumberMap">

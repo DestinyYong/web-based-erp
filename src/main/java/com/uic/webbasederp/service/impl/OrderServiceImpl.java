@@ -4,17 +4,17 @@ import com.uic.webbasederp.domain.po.Order;
 import com.uic.webbasederp.domain.po.OrderProduct;
 import com.uic.webbasederp.domain.po.Product;
 import com.uic.webbasederp.domain.po.Wharehouse;
+import com.uic.webbasederp.domain.vo.BasicProductVo;
+import com.uic.webbasederp.domain.vo.CustomerOrderVo;
 import com.uic.webbasederp.domain.vo.OrderNumberVo;
 import com.uic.webbasederp.domain.vo.OrderPriceVo;
-import com.uic.webbasederp.mapper.OrderMapper;
-import com.uic.webbasederp.mapper.OrderProductMapper;
-import com.uic.webbasederp.mapper.ProductMapper;
-import com.uic.webbasederp.mapper.WharehouseMapper;
+import com.uic.webbasederp.mapper.*;
 import com.uic.webbasederp.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -29,6 +29,8 @@ public class OrderServiceImpl implements OrderService{
     private ProductMapper productMapper;
     @Autowired
     private OrderProductMapper orderProductMapper;
+    @Autowired
+    private CustomerMapper customerMapper;
 
     @Override
     public void saveOrder(Order orders) {
@@ -41,8 +43,63 @@ public class OrderServiceImpl implements OrderService{
     }
 
     @Override
-    public List<Order> listOrder(int page) {
-        return orderMapper.listOrder((page-1)*15);
+    public List<CustomerOrderVo> listOrder() {
+
+        List<Order> orders = orderMapper.listOrder();
+        List<CustomerOrderVo> customerOrderVos = new ArrayList<>();
+        for(Order order : orders){
+            CustomerOrderVo customerOrderVo = new CustomerOrderVo();
+            customerOrderVo.setOrderId(order.getOrderId());
+            customerOrderVo.setCreateTime(order.getCreateTime());
+            customerOrderVo.setDeliveryTime(order.getDeliveryTime());
+            customerOrderVo.setLatestDeliveryTime(order.getLatestDeliveryTime());
+            customerOrderVo.setState(order.getState());
+            customerOrderVo.setCustomerName(customerMapper.getCustomerById(order.getCustomerId()).getCompany());
+            customerOrderVo.setTotalOrderPrice(order.getTotalOrderPrice());
+
+            List<BasicProductVo> basicProductVos = new ArrayList<>();
+            BasicProductVo basicProductVo = new BasicProductVo();
+            List<OrderProduct> orderProducts = orderProductMapper.getProductIdByOrderId(order.getOrderId());
+            for(OrderProduct orderProduct : orderProducts){
+                basicProductVo.setNumber(orderProduct.getNumber());
+                basicProductVo.setPrice(orderProduct.getPrice());
+                basicProductVo.setProductName(productMapper.getProductById(orderProduct.getProductId()).getProductName());
+                basicProductVos.add(basicProductVo);
+            }
+            customerOrderVo.setBasicProductVos(basicProductVos);
+            customerOrderVos.add(customerOrderVo);
+        }
+        return customerOrderVos;
+    }
+
+    @Override
+    public List<CustomerOrderVo> listOrderByCustomerId(int customerId) {
+
+        List<Order> orders = orderMapper.listOrderByCustomerId(customerId);
+        List<CustomerOrderVo> customerOrderVos = new ArrayList<>();
+        for(Order order : orders){
+            CustomerOrderVo customerOrderVo = new CustomerOrderVo();
+            customerOrderVo.setOrderId(order.getOrderId());
+            customerOrderVo.setCreateTime(order.getCreateTime());
+            customerOrderVo.setDeliveryTime(order.getDeliveryTime());
+            customerOrderVo.setLatestDeliveryTime(order.getLatestDeliveryTime());
+            customerOrderVo.setState(order.getState());
+            customerOrderVo.setCustomerName(customerMapper.getCustomerById(order.getCustomerId()).getCompany());
+            customerOrderVo.setTotalOrderPrice(order.getTotalOrderPrice());
+
+            List<BasicProductVo> basicProductVos = new ArrayList<>();
+            BasicProductVo basicProductVo = new BasicProductVo();
+            List<OrderProduct> orderProducts = orderProductMapper.getProductIdByOrderId(order.getOrderId());
+            for(OrderProduct orderProduct : orderProducts){
+                basicProductVo.setNumber(orderProduct.getNumber());
+                basicProductVo.setPrice(orderProduct.getPrice());
+                basicProductVo.setProductName(productMapper.getProductById(orderProduct.getProductId()).getProductName());
+                basicProductVos.add(basicProductVo);
+            }
+            customerOrderVo.setBasicProductVos(basicProductVos);
+            customerOrderVos.add(customerOrderVo);
+        }
+        return customerOrderVos;
     }
 
     @Override

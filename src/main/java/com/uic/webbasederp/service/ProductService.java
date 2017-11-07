@@ -12,4 +12,5 @@ public interface ProductService {
     List<Product> getSubproductByProductID(int productId);
     List<Product> getProduct(int page);
     List<Product> getAllProduct();
+
 }

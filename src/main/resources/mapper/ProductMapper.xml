@@ -135,4 +135,10 @@
         <include refid="Base_Column_List"/>
         from erp_product where flag = 1
     </select>
+
+    <select id="getProductById" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from erp_product where product_id = #{arg0}
+    </select>
 </mapper>
