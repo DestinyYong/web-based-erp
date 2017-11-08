@@ -2,10 +2,7 @@ package com.uic.webbasederp.controller;
 
 import com.uic.webbasederp.domain.po.Order;
 import com.uic.webbasederp.domain.po.OrderProduct;
-import com.uic.webbasederp.domain.vo.CustomerOrderVo;
-import com.uic.webbasederp.domain.vo.OrderNumberVo;
-import com.uic.webbasederp.domain.vo.OrderPriceVo;
-import com.uic.webbasederp.domain.vo.OrderVo;
+import com.uic.webbasederp.domain.vo.*;
 import com.uic.webbasederp.service.OrderProductService;
 import com.uic.webbasederp.service.OrderService;
 import com.uic.webbasederp.utilConst.CommonResultResponse;
@@ -52,6 +49,22 @@ public class OrderController {
     public ResponseEntity<CommonResultResponse<List<OrderPriceVo>>> analyzeOrderPrice(@RequestParam String startDate, @RequestParam String endDate) throws Exception{
         List<OrderPriceVo> orderPriceVos = orderService.getOrderPrice(startDate, endDate);
         CommonResultResponse<List<OrderPriceVo>> responseBody = CommonResultResponse.buildSuccessCommonResultResponse(orderPriceVos);
+        responseBody.setMessage(ResponseMessage.SUCCESS);
+        return ResponseEntity.status(HttpStatus.OK).body(responseBody);
+    }
+    @ApiOperation(value = "analyze the order Cost")
+    @RequestMapping(value="/analyze/cost",method = RequestMethod.GET)
+    public ResponseEntity<CommonResultResponse<List<OrderCostVo>>> analyzeOrderCost(@RequestParam String startDate, @RequestParam String endDate) throws Exception{
+        List<OrderCostVo> orderPriceVos = orderService.getOrderCost(startDate, endDate);
+        CommonResultResponse<List<OrderCostVo>> responseBody = CommonResultResponse.buildSuccessCommonResultResponse(orderPriceVos);
+        responseBody.setMessage(ResponseMessage.SUCCESS);
+        return ResponseEntity.status(HttpStatus.OK).body(responseBody);
+    }
+    @ApiOperation(value = "analyze the order income")
+    @RequestMapping(value="/analyze/income",method = RequestMethod.GET)
+    public ResponseEntity<CommonResultResponse<List<OrderIncomeVo>>> analyzeOrderIncome(@RequestParam String startDate, @RequestParam String endDate) throws Exception{
+        List<OrderIncomeVo> orderPriceVos = orderService.getOrderIncome(startDate, endDate);
+        CommonResultResponse<List<OrderIncomeVo>> responseBody = CommonResultResponse.buildSuccessCommonResultResponse(orderPriceVos);
         responseBody.setMessage(ResponseMessage.SUCCESS);
         return ResponseEntity.status(HttpStatus.OK).body(responseBody);
     }

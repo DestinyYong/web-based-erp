@@ -1,6 +1,8 @@
 package com.uic.webbasederp.mapper;
 
 import com.uic.webbasederp.domain.po.Order;
+import com.uic.webbasederp.domain.vo.OrderCostVo;
+import com.uic.webbasederp.domain.vo.OrderIncomeVo;
 import com.uic.webbasederp.domain.vo.OrderNumberVo;
 import com.uic.webbasederp.domain.vo.OrderPriceVo;
 import org.apache.ibatis.annotations.Mapper;
@@ -16,6 +18,8 @@ public interface OrderMapper {
     void removeOrder(int orderId);
     List<OrderNumberVo> getOrderNumber(String startDate, String endDate);
     List<OrderPriceVo> getOrderPrice(String startDate, String endDate);
+    List<OrderCostVo> getOrderCost(String startDate, String endDate);
+    List<OrderIncomeVo> getOrderIncome(String startDate, String endDate);
     void changeOrderState(int orderId, int state);
 
 }

@@ -4,10 +4,7 @@ import com.uic.webbasederp.domain.po.Order;
 import com.uic.webbasederp.domain.po.OrderProduct;
 import com.uic.webbasederp.domain.po.Product;
 import com.uic.webbasederp.domain.po.Wharehouse;
-import com.uic.webbasederp.domain.vo.BasicProductVo;
-import com.uic.webbasederp.domain.vo.CustomerOrderVo;
-import com.uic.webbasederp.domain.vo.OrderNumberVo;
-import com.uic.webbasederp.domain.vo.OrderPriceVo;
+import com.uic.webbasederp.domain.vo.*;
 import com.uic.webbasederp.mapper.*;
 import com.uic.webbasederp.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -134,5 +131,15 @@ public class OrderServiceImpl implements OrderService{
             }
         }
 
+    }
+
+    @Override
+    public List<OrderCostVo> getOrderCost(String startDate, String endDate) throws Exception {
+        return orderMapper.getOrderCost(startDate, endDate);
+    }
+
+    @Override
+    public List<OrderIncomeVo> getOrderIncome(String startDate, String endDate) throws Exception {
+        return orderMapper.getOrderIncome(startDate, endDate);
     }
 }
