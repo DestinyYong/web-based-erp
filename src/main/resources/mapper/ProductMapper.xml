@@ -19,7 +19,7 @@
     </resultMap>
 
     <sql id="Base_Column_List" >
-        id, product_id, product_name, price, cost, type, product_length, product_width, size_of_box, min_storage_number, picture_address, state,flag
+        id, product_id, product_name, price, cost, type, product_length, product_width, product_height,size_of_box, min_storage_number, picture_address, state,flag
     </sql>
     <insert id="saveProduct" parameterType="OrderProduct"
             useGeneratedKeys="true" keyProperty="id">

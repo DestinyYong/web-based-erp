@@ -8,5 +8,5 @@ import java.util.List;
 public interface WharehouseService {
     void addProductIntoWharehouse(Wharehouse wharehouse);
     void updateWharehouse(Wharehouse wharehouse);
-    List<WharehouseDetailVo> listWhareHouse(int page);
+    List<WharehouseDetailVo> listWhareHouse();
 }

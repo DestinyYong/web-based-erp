@@ -29,8 +29,8 @@ public class WharehouseServiceImpl implements WharehouseService{
     }
 
     @Override
-    public List<WharehouseDetailVo> listWhareHouse(int page) {
-        List<Wharehouse> wharehouses = wharehouseMapper.listWhareHouse((page-1)*15);
+    public List<WharehouseDetailVo> listWhareHouse() {
+        List<Wharehouse> wharehouses = wharehouseMapper.listWhareHouse();
         List<WharehouseDetailVo> wharehouseDetailVos = new ArrayList<>();
         for(Wharehouse wharehouse : wharehouses){
             WharehouseDetailVo wharehouseDetailVo = new WharehouseDetailVo();

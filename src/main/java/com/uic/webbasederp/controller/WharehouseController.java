@@ -36,8 +36,8 @@ public class WharehouseController {
 
     @ApiOperation(value = "add product into wharehouse")
     @RequestMapping(value="/all",method = RequestMethod.GET)
-    public ResponseEntity<CommonResultResponse<List<WharehouseDetailVo>>> showWharehouse(@RequestParam int page) throws Exception {
-        List<WharehouseDetailVo> wharehouseDetailVos = wharehouseService.listWhareHouse(page);
+    public ResponseEntity<CommonResultResponse<List<WharehouseDetailVo>>> showWharehouse() throws Exception {
+        List<WharehouseDetailVo> wharehouseDetailVos = wharehouseService.listWhareHouse();
         CommonResultResponse<List<WharehouseDetailVo>> responseBody = CommonResultResponse.buildSuccessCommonResultResponse(wharehouseDetailVos);
         return ResponseEntity.status(HttpStatus.OK).body(responseBody);
     }

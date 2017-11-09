@@ -9,6 +9,6 @@ import java.util.List;
 public interface WharehouseMapper {
     void addProductIntoWharehouse(Wharehouse wharehouse);
     void updateWharehouse(Wharehouse wharehouse);
-    List<Wharehouse> listWhareHouse(int page);
+    List<Wharehouse> listWhareHouse();
     Wharehouse listWhareHouseById(int productId);
 }
