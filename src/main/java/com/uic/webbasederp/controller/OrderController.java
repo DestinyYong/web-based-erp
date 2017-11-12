@@ -5,6 +5,7 @@ import com.uic.webbasederp.domain.po.OrderProduct;
 import com.uic.webbasederp.domain.vo.*;
 import com.uic.webbasederp.service.OrderProductService;
 import com.uic.webbasederp.service.OrderService;
+import com.uic.webbasederp.service.ReportService;
 import com.uic.webbasederp.utilConst.CommonResultResponse;
 import com.uic.webbasederp.utilConst.ResponseHelper;
 import com.uic.webbasederp.utilConst.ResponseMessage;
@@ -26,6 +27,9 @@ public class OrderController {
     private OrderService orderService;
     @Autowired
     private OrderProductService orderProductService;
+    @Autowired
+    private ReportService reportService;
+
     @ApiOperation(value = "add an order")
     @RequestMapping(value="/new",method = RequestMethod.POST)
     public ResponseEntity<CommonResultResponse> saveOrder(@RequestBody OrderVo orderVo) throws Exception{
@@ -91,6 +95,13 @@ public class OrderController {
     @RequestMapping(value="/finish",method = RequestMethod.POST)
     public ResponseEntity<CommonResultResponse> changeOrderState(@RequestParam int orderId, @RequestParam int state) throws Exception{
         orderService.changeOrderState(orderId,state);
+        return ResponseHelper.success();
+    }
+
+    @ApiOperation(value = "create the order report")
+    @RequestMapping(value="/excel",method = RequestMethod.POST)
+    public ResponseEntity<CommonResultResponse> createExcel(@RequestBody List<ReportVo> reportVos) throws Exception{
+        reportService.createExcel(reportVos);
         return ResponseHelper.success();
     }
 }

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.uic.webbasederp.mapper.InspectionMapper" >
+    <resultMap id="BaseResultMap" type="com.uic.webbasederp.domain.po.Inspection" >
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <result column="product_id" property="productId" jdbcType="INTEGER" />
+        <result column="defect_name" property="defectName" jdbcType="VARCHAR" />
+        <result column="defect_description" property="defectDescription" jdbcType="VARCHAR" />
+        <result column="acceptable_number" property="acceptableNumber" jdbcType="INTEGER" />
+        <result column="inspect_number" property="inspectNumber" jdbcType="INTEGER" />
+        <result column="acceptable_rate" property="acceptableRate" jdbcType="DOUBLE" />
+        <result column="employee_id" property="employeeId" jdbcType="INTEGER"/>
+        <result column="inspect_date" property="inspectDate" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        id, product_id, defect_name, defect_description, acceptable_number, inspect_number, acceptable_rate, employee_id, inspect_date
+    </sql>
+
+    <insert id="saveInspection" parameterType="Inspection"
+            useGeneratedKeys="true" keyProperty="id">
+        insert into erp_quality_inspection
+        <trim prefix="(" suffix=")">
+            <if test="productId != null">
+                product_id,
+            </if>
+            <if test="defectName != null">
+                defect_name,
+            </if>
+            <if test="defectDescription != null">
+                defect_description,
+            </if>
+            <if test="acceptableNumber != null">
+                acceptable_number,
+            </if>
+            <if test="inspectNumber != null">
+                inspect_number,
+            </if>
+            <if test="acceptableRate != null">
+                acceptable_rate,
+            </if>
+            <if test="employeeId != null">
+                employee_id,
+            </if>
+            <if test="inspectDate != null">
+                inspect_date
+            </if>
+        </trim>
+
+        <trim prefix="values (" suffix=")" >
+            <if test="productId != null">
+                #{productId,jdbcType=INTEGER},
+            </if>
+            <if test="defectName != null">
+                #{defectName,jdbcType=VARCHAR},
+            </if>
+            <if test="defectDescription != null">
+                #{defectDescription,jdbcType=VARCHAR},
+            </if>
+            <if test="acceptableNumber != null">
+                #{acceptableNumber,jdbcType=INTEGER},
+            </if>
+            <if test="inspectNumber != null">
+                #{inspectNumber,jdbcType=INTEGER},
+            </if>
+            <if test="acceptableRate != null">
+                #{acceptableRate,jdbcType=DOUBLE},
+            </if>
+            <if test="employeeId != null">
+                #{employeeId,jdbcType=INTEGER},
+            </if>
+            <if test="inspectDate != null">
+                #{inspectDate,jdbcType=VARCHAR}
+            </if>
+        </trim>
+    </insert>
+
+    <select id="listInspection" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from erp_quality_inspection where inspect_date &gt;= #{arg0} AND inspect_date &lt;= #{arg1}
+    </select>
+</mapper>
