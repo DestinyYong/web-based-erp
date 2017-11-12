@@ -9,4 +9,6 @@ import java.util.List;
 public interface InspectionMapper {
     void saveInspection(Inspection inspection);
     List<Inspection> listInspection(String startDate, String endDate);
+    Inspection getInspectionByProductId(int productId, String date);
+    void updateInspection(Inspection inspection);
 }

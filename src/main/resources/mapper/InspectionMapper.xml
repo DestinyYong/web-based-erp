@@ -80,4 +80,32 @@
         <include refid="Base_Column_List"/>
         from erp_quality_inspection where inspect_date &gt;= #{arg0} AND inspect_date &lt;= #{arg1}
     </select>
+
+    <select id="getInspectionByProductId" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from erp_quality_inspection where inspect_date = #{arg1} AND product_id = #{arg0}
+    </select>
+
+    <update id="updateInspection" parameterType="Inspection">
+        update erp_quality_inspection
+        <set>
+            <if test="defectName != null">
+                defect_name = #{defectName,jdbcType=VARCHAR},
+            </if>
+            <if test="defectDescription != null">
+                defect_description = #{defectDescription,jdbcType=VARCHAR},
+            </if>
+            <if test="acceptableNumber != null">
+                acceptable_number = #{acceptableNumber,jdbcType=INTEGER},
+            </if>
+            <if test="inspectNumber != null">
+                inspect_number = #{inspectNumber,jdbcType=INTEGER},
+            </if>
+            <if test="acceptableRate != null">
+                acceptable_rate = #{acceptableRate,jdbcType=DOUBLE}
+            </if>
+        </set>
+        where product_id = #{productId,jdbcType=INTEGER}
+    </update>
 </mapper>

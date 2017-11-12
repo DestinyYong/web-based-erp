@@ -15,7 +15,18 @@ public class InspectionServiceImpl implements InspectionService{
     private InspectionMapper inspectionMapper;
     @Override
     public void saveInspection(Inspection inspection) {
-        inspectionMapper.saveInspection(inspection);
+        Inspection dbInspection = inspectionMapper.getInspectionByProductId(inspection.getProductId(),inspection.getInspectDate());
+        if(dbInspection == null){
+            inspectionMapper.saveInspection(inspection);
+        }
+        else {
+            inspection.setAcceptableNumber(inspection.getAcceptableNumber()+dbInspection.getAcceptableNumber());
+            inspection.setDefectName(dbInspection.getDefectName()+","+inspection.getDefectName());
+            inspection.setDefectDescription(dbInspection.getDefectDescription()+","+inspection.getDefectDescription());
+            inspection.setInspectNumber(inspection.getInspectNumber()+dbInspection.getInspectNumber());
+            inspection.setAcceptableRate(inspection.getAcceptableNumber()*1.0/inspection.getInspectNumber());
+            inspectionMapper.updateInspection(inspection);
+        }
     }
 
     @Override
