@@ -51,7 +51,7 @@
     <select id="listWhareHouse" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
-        from erp_wharehouse ORDER BY available_number ASC
+        from erp_wharehouse ORDER BY (min_storage_number - available_number) DESC
     </select>
 
     <select id="listWhareHouseById" resultMap="BaseResultMap">
