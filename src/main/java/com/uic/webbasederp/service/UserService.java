@@ -5,7 +5,7 @@ import com.uic.webbasederp.domain.vo.UserVo;
 
 public interface UserService {
     void saveUser(User user);
-    UserVo isRight(int employeeId, String password);
+    Object isRight(int employeeId, String password, Integer status);
     void removeUser(int employeeId);
     void updateAuthority(int employeeId, int authority);
 }
