@@ -24,8 +24,8 @@ public class UserController {
 
     @ApiOperation(value = "login and check user authority")
     @RequestMapping(value="/login",method = RequestMethod.POST,consumes="application/json",produces="application/json")
-    public ResponseEntity<CommonResultResponse<UserVo>> login(@RequestBody LoginVo loginVo) throws Exception{
-        CommonResultResponse<UserVo> responseBody = CommonResultResponse.buildSuccessCommonResultResponse(userService.isRight(loginVo.getEmployeeId(),loginVo.getPassword()));
+    public ResponseEntity<CommonResultResponse<Object>> login(@RequestBody LoginVo loginVo) throws Exception{
+        CommonResultResponse<Object> responseBody = CommonResultResponse.buildSuccessCommonResultResponse(userService.isRight(loginVo.getEmployeeId(),loginVo.getPassword(),loginVo.getStatus()));
         responseBody.setMessage(ResponseMessage.SUCCESS);
         return ResponseEntity.status(HttpStatus.OK).body(responseBody);
     }
