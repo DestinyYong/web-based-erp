@@ -35,6 +35,7 @@ public class CustomerController {
         customerService.saveCustomer(customer);
         User user = new User();
         user.setEmployeeId(customer.getCustomerId());
+        user.setAuthority(1);
         userService.saveUser(user);
         return ResponseHelper.success();
     }
