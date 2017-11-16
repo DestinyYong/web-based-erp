@@ -21,11 +21,12 @@ public class OrderProductServiceImpl implements OrderProductService{
     @Autowired
     private WharehouseMapper wharehouseMapper;
     @Override
-    public void saveOrderProduct(OrderProduct orderProduct) {
+    public void saveOrderProduct(OrderProduct orderProduct, String date) {
 
         List<Product> products = productMapper.getSubProductByProductId(orderProduct.getProductId());
-
-
+        Product productDB = productMapper.getProductById(orderProduct.getProductId());
+        orderProduct.setCost(productDB.getCost()*orderProduct.getNumber());
+        orderProduct.setCreateTime(date);
         orderProductMapper.saveOrderProduct(orderProduct);
 
         for(Product product : products){

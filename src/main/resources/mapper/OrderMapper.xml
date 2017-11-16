@@ -113,19 +113,11 @@
     <select id="getOrderCost" resultMap="OrderCostMap">
         SELECT
         DATE_FORMAT(create_time, &apos;%Y%m&apos;) months,
-        sum(erp_product.cost) cost
-        FROM
-        erp_order,
-        erp_product
-        WHERE
-        erp_product.product_id IN (
-        SELECT
-        product_id
+        sum(cost) cost
         FROM
         erp_order_product
         WHERE
         create_time &gt;= #{arg0} AND create_time &lt;= #{arg1}
-        )
         GROUP BY
         months
     </select>
@@ -133,19 +125,11 @@
     <select id="getOrderIncome" resultMap="OrderIncomeMap">
         SELECT
         DATE_FORMAT(create_time, &apos;%Y%m&apos;) months,
-        sum(erp_order.total_order_price) - sum(erp_product.cost) income
-        FROM
-        erp_order,
-        erp_product
-        WHERE
-        erp_product.product_id IN (
-        SELECT
-        product_id
+        (sum(price) - sum(cost)) income
         FROM
         erp_order_product
         WHERE
         create_time &gt;= #{arg0} AND create_time &lt;= #{arg1}
-        )
         GROUP BY
         months
     </select>

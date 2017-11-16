@@ -36,7 +36,7 @@ public class OrderController {
         orderService.saveOrder(orderVo.getOrder());
         List<OrderProduct> orderProducts = orderVo.getOrderProducts();
         for(OrderProduct orderProduct : orderProducts){
-            orderProductService.saveOrderProduct(orderProduct);
+            orderProductService.saveOrderProduct(orderProduct,orderVo.getOrder().getCreateTime());
         }
         return ResponseHelper.success();
     }

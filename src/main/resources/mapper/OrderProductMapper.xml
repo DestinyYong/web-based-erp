@@ -6,11 +6,13 @@
         <result column="order_id" property="orderId" jdbcType="INTEGER" />
         <result column="product_id" property="productId" jdbcType="INTEGER" />
         <result column="number" property="number" jdbcType="INTEGER" />
+        <result column="cost" property="cost" jdbcType="DOUBLE" />
         <result column="price" property="price" jdbcType="DOUBLE" />
+        <result column="create_time" property="createTime" jdbcType="VARCHAR" />
     </resultMap>
 
     <sql id="Base_Column_List" >
-        id, order_id, product_id, number, price
+        id, order_id, product_id, number, cost, price, create_time
     </sql>
 
     <insert id="saveOrderProduct" parameterType="OrderProduct"
@@ -26,8 +28,14 @@
             <if test="number != null">
                 number,
             </if>
+            <if test="cost != null">
+                cost,
+            </if>
             <if test="price != null">
-                price
+                price,
+            </if>
+            <if test="createTime != null">
+                create_time
             </if>
 
         </trim>
@@ -40,10 +48,16 @@
                 #{productId,jdbcType=INTEGER},
             </if>
             <if test="number != null">
-                #{number,jdbcType=VARCHAR},
+                #{number,jdbcType=INTEGER},
+            </if>
+            <if test="cost != null">
+                #{cost,jdbcType=DOUBLE},
             </if>
             <if test="price != null">
-                #{price,jdbcType=DOUBLE}
+                #{price,jdbcType=DOUBLE},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=VARCHAR}
             </if>
         </trim>
     </insert>

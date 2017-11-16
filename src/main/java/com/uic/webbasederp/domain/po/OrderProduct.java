@@ -10,5 +10,7 @@ public class OrderProduct {
     private Integer orderId;
     private Integer productId;
     private Integer number;
+    private Double cost;
     private Double price;
+    private String createTime;
 }
