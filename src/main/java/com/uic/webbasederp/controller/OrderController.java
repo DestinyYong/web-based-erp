@@ -100,8 +100,8 @@ public class OrderController {
 
     @ApiOperation(value = "create the order report")
     @RequestMapping(value="/excel",method = RequestMethod.POST)
-    public ResponseEntity<CommonResultResponse> createExcel(@RequestBody List<ReportVo> reportVos) throws Exception{
-        reportService.createExcel(reportVos);
+    public ResponseEntity<CommonResultResponse> createExcel(@RequestBody ReportRequestVo ReportRequestVo) throws Exception{
+        reportService.createExcel(ReportRequestVo);
         return ResponseHelper.success();
     }
 }
