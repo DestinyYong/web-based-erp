@@ -2,6 +2,7 @@ package com.uic.webbasederp.controller;
 
 import com.uic.webbasederp.domain.po.Inspection;
 import com.uic.webbasederp.domain.po.OrderProduct;
+import com.uic.webbasederp.domain.vo.InspectionVo;
 import com.uic.webbasederp.domain.vo.OrderPriceVo;
 import com.uic.webbasederp.domain.vo.OrderVo;
 import com.uic.webbasederp.service.InspectionService;
@@ -31,8 +32,8 @@ public class InspectionController {
     }
 
     @RequestMapping(value="/list",method = RequestMethod.GET)
-    public ResponseEntity<CommonResultResponse<List<Inspection>>> listQI(@RequestParam String startDate, @RequestParam String endDate) throws Exception{
-        CommonResultResponse<List<Inspection>> responseBody = CommonResultResponse.buildSuccessCommonResultResponse(inspectionService.listInspection(startDate, endDate));
+    public ResponseEntity<CommonResultResponse<List<InspectionVo>>> listQI(@RequestParam String startDate, @RequestParam String endDate) throws Exception{
+        CommonResultResponse<List<InspectionVo>> responseBody = CommonResultResponse.buildSuccessCommonResultResponse(inspectionService.listInspection(startDate, endDate));
         return ResponseEntity.status(HttpStatus.OK).body(responseBody);
     }
 }

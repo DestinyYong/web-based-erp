@@ -84,7 +84,7 @@
     <select id="getInspectionByProductId" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
-        from erp_quality_inspection where inspect_date = #{arg1} AND product_id = #{arg0}
+        from erp_quality_inspection where inspect_date = #{arg1} AND product_id = #{arg0} order by inspect_date ASC
     </select>
 
     <update id="updateInspection" parameterType="Inspection">
