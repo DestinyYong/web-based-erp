@@ -78,13 +78,13 @@
     <select id="listInspection" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
-        from erp_quality_inspection where inspect_date &gt;= #{arg0} AND inspect_date &lt;= #{arg1}
+        from erp_quality_inspection where inspect_date &gt;= #{arg0} AND inspect_date &lt;= #{arg1} order by inspect_date
     </select>
 
     <select id="getInspectionByProductId" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
-        from erp_quality_inspection where inspect_date = #{arg1} AND product_id = #{arg0} order by inspect_date ASC
+        from erp_quality_inspection where inspect_date = #{arg1} AND product_id = #{arg0}
     </select>
 
     <update id="updateInspection" parameterType="Inspection">
