@@ -11,4 +11,5 @@ public interface EmployeeService {
     void updateInformation(Employees employees);
     void removeEmplyee(int id);
     Employees getInformationById(int employeeId);
+    List<Employees> getWorker();
 }

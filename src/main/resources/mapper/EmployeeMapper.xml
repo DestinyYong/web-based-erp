@@ -117,4 +117,10 @@
         </set>
         where id = #{id,jdbcType=INTEGER}
     </update>
+
+    <select id="getWorker" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from erp_employee WHERE id IN (SELECT employee_id from erp_user where authority = 0)
+    </select>
 </mapper>

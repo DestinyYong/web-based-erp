@@ -60,4 +60,9 @@ public class EmployeeServiceImpl implements EmployeeService{
     public Employees getInformationById(int employeeId) {
         return null;
     }
+
+    @Override
+    public List<Employees> getWorker() {
+        return employeeMapper.getWorker();
+    }
 }

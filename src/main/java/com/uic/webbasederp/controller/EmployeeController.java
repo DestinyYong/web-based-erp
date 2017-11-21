@@ -52,4 +52,11 @@ public class EmployeeController {
         employeeService.updateInformation(employees);
         return ResponseHelper.success();
     }
+
+    @ApiOperation(value = "get all the worker")
+    @RequestMapping(value="/worker",method = RequestMethod.GET)
+    public ResponseEntity<CommonResultResponse<List<Employees>>> updateEmployee() throws Exception{
+        CommonResultResponse<List<Employees>> responseBody = CommonResultResponse.buildSuccessCommonResultResponse(employeeService.getWorker());
+        return ResponseEntity.status(HttpStatus.OK).body(responseBody);
+    }
 }
