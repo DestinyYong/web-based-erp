@@ -8,6 +8,7 @@ import lombok.Setter;
 public class InspectionVo {
     private int productId;
     private String productName;
+    private String employeeName;
     private String defectName;
     private String defectDescription;
     private int acceptableNumber;

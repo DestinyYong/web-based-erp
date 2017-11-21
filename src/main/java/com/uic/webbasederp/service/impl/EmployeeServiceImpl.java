@@ -58,7 +58,7 @@ public class EmployeeServiceImpl implements EmployeeService{
 
     @Override
     public Employees getInformationById(int employeeId) {
-        return null;
+        return employeeMapper.getInformationById(employeeId);
     }
 
     @Override

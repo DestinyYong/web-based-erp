@@ -2,6 +2,7 @@ package com.uic.webbasederp.service.impl;
 
 import com.uic.webbasederp.domain.po.Inspection;
 import com.uic.webbasederp.domain.vo.InspectionVo;
+import com.uic.webbasederp.mapper.EmployeeMapper;
 import com.uic.webbasederp.mapper.InspectionMapper;
 import com.uic.webbasederp.mapper.ProductMapper;
 import com.uic.webbasederp.service.InspectionService;
@@ -18,6 +19,8 @@ public class InspectionServiceImpl implements InspectionService{
     private InspectionMapper inspectionMapper;
     @Autowired
     private ProductMapper productMapper;
+    @Autowired
+    private EmployeeMapper employeeMapper;
     @Override
     public void saveInspection(Inspection inspection) {
         Inspection dbInspection = inspectionMapper.getInspectionByProductId(inspection.getProductId(),inspection.getInspectDate());
@@ -49,6 +52,7 @@ public class InspectionServiceImpl implements InspectionService{
             inspectionVo.setProductId(inspection.getProductId());
             inspectionVo.setInspectNumber(inspection.getInspectNumber());
             inspectionVo.setProductName(productMapper.getProductById(inspection.getProductId()).getProductName());
+            inspectionVo.setEmployeeName(employeeMapper.getInformationById(inspection.getEmployeeId()).getName());
             inspectionVos.add(inspectionVo);
         }
         return inspectionVos;
