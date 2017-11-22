@@ -52,9 +52,10 @@ public class EmployeeServiceImpl implements EmployeeService{
             employeeVo.setPosition(employee.getPosition());
             employeeVo.setSalary(employee.getSalary());
             employeeVo.setAuthority(userMapper.getAuthority(employee.getId()));
+            employeeVos.add(employeeVo);
         }
 
-        return null;
+        return employeeVos;
     }
 
     /**
