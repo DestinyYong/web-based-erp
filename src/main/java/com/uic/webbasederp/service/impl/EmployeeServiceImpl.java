@@ -32,8 +32,8 @@ public class EmployeeServiceImpl implements EmployeeService{
      * @return Employees
      */
     @Override
-    public List<Employees> getInformation(int page) {
-        List<Employees> employees = employeeMapper.getInformation((page-1)*15);
+    public List<Employees> getInformation() {
+        List<Employees> employees = employeeMapper.getInformation();
 
         return employees;
     }

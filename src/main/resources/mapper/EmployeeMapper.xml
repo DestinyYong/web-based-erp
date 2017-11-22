@@ -78,7 +78,7 @@
     <select id="getInformation" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
-        from erp_employee limit #{0},15
+        from erp_employee
     </select>
 
     <select id="getInformationById" resultMap="BaseResultMap">

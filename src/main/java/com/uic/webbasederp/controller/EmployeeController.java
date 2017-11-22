@@ -39,8 +39,8 @@ public class EmployeeController {
 
     @ApiOperation(value = "list 15 employees")
     @RequestMapping(value="/show",method = RequestMethod.GET)
-    public ResponseEntity<CommonResultResponse<List<Employees>>> listEmployee(@RequestParam Integer page) throws Exception{
-        List<Employees> employees = employeeService.getInformation(page);
+    public ResponseEntity<CommonResultResponse<List<Employees>>> listEmployee() throws Exception{
+        List<Employees> employees = employeeService.getInformation();
         CommonResultResponse<List<Employees>> responseBody = CommonResultResponse.buildSuccessCommonResultResponse(employees);
         responseBody.setMessage(ResponseMessage.SUCCESS);
         return ResponseEntity.status(HttpStatus.OK).body(responseBody);

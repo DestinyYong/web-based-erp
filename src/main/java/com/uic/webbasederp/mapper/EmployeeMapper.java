@@ -8,7 +8,7 @@ import java.util.List;
 @Mapper
 public interface EmployeeMapper {
     void saveEmployee(Employees employees);
-    List<Employees> getInformation(int page);
+    List<Employees> getInformation();
     void updateInformation(Employees employees);
     void removeEmplyee(int id);
     Employees getInformationById(int employeeId);
