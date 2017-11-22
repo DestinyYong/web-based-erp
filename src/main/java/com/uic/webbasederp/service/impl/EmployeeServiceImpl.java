@@ -1,11 +1,14 @@
 package com.uic.webbasederp.service.impl;
 
 import com.uic.webbasederp.domain.po.Employees;
+import com.uic.webbasederp.domain.vo.EmployeeVo;
 import com.uic.webbasederp.mapper.EmployeeMapper;
+import com.uic.webbasederp.mapper.UserMapper;
 import com.uic.webbasederp.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -13,6 +16,8 @@ public class EmployeeServiceImpl implements EmployeeService{
 
     @Autowired
     private EmployeeMapper employeeMapper;
+    @Autowired
+    private UserMapper userMapper;
 
     /**
      * save a new employee in database
@@ -32,10 +37,24 @@ public class EmployeeServiceImpl implements EmployeeService{
      * @return Employees
      */
     @Override
-    public List<Employees> getInformation() {
+    public List<EmployeeVo> getInformation() {
         List<Employees> employees = employeeMapper.getInformation();
+        List<EmployeeVo> employeeVos = new ArrayList<>();
+        for(Employees employee : employees){
+            EmployeeVo employeeVo = new EmployeeVo();
+            employeeVo.setAddress(employee.getAddress());
+            employeeVo.setDepartment(employee.getDepartment());
+            employeeVo.setGender(employee.getGender());
+            employeeVo.setId(employee.getId());
+            employeeVo.setIDCard(employee.getIDCard());
+            employeeVo.setName(employee.getName());
+            employeeVo.setPhoneNumber(employee.getPhoneNumber());
+            employeeVo.setPosition(employee.getPosition());
+            employeeVo.setSalary(employee.getSalary());
+            employeeVo.setAuthority(userMapper.getAuthority(employee.getId()));
+        }
 
-        return employees;
+        return null;
     }
 
     /**

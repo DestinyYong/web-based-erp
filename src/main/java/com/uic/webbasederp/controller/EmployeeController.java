@@ -2,6 +2,7 @@ package com.uic.webbasederp.controller;
 
 import com.uic.webbasederp.domain.po.Employees;
 import com.uic.webbasederp.domain.po.User;
+import com.uic.webbasederp.domain.vo.EmployeeVo;
 import com.uic.webbasederp.service.EmployeeService;
 import com.uic.webbasederp.service.UserService;
 import com.uic.webbasederp.utilConst.CommonResultResponse;
@@ -39,9 +40,9 @@ public class EmployeeController {
 
     @ApiOperation(value = "list 15 employees")
     @RequestMapping(value="/show",method = RequestMethod.GET)
-    public ResponseEntity<CommonResultResponse<List<Employees>>> listEmployee() throws Exception{
-        List<Employees> employees = employeeService.getInformation();
-        CommonResultResponse<List<Employees>> responseBody = CommonResultResponse.buildSuccessCommonResultResponse(employees);
+    public ResponseEntity<CommonResultResponse<List<EmployeeVo>>> listEmployee() throws Exception{
+        List<EmployeeVo> employees = employeeService.getInformation();
+        CommonResultResponse<List<EmployeeVo>> responseBody = CommonResultResponse.buildSuccessCommonResultResponse(employees);
         responseBody.setMessage(ResponseMessage.SUCCESS);
         return ResponseEntity.status(HttpStatus.OK).body(responseBody);
     }

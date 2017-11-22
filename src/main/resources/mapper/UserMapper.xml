@@ -36,6 +36,10 @@
         select authority from erp_user where employee_id = #{arg0} and password = #{arg1}
     </select>
 
+    <select id="getAuthority" resultType="java.lang.Integer">
+        select authority from erp_user where employee_id = #{arg0}
+    </select>
+
     <update id="updateAuthority" parameterType="java.lang.Integer">
     update erp_user
     <set>

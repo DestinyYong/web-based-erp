@@ -9,5 +9,6 @@ public interface UserMapper {
     void saveUser(User user);
     Integer isRight(int employeeId, String password);
     void removeUser(int employeeId);
+    Integer getAuthority(int employeeId);
     void updateAuthority(int employeeId, int authority);
 }
