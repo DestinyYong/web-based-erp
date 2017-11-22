@@ -1,6 +1,5 @@
 package com.uic.webbasederp.controller;
 
-import com.uic.webbasederp.domain.po.Order;
 import com.uic.webbasederp.domain.po.OrderProduct;
 import com.uic.webbasederp.domain.vo.*;
 import com.uic.webbasederp.service.OrderProductService;
@@ -16,8 +15,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @EnableAutoConfiguration
@@ -100,8 +100,7 @@ public class OrderController {
 
     @ApiOperation(value = "create the order report")
     @RequestMapping(value="/excel",method = RequestMethod.POST)
-    public ResponseEntity<CommonResultResponse> createExcel(@RequestBody ReportRequestVo ReportRequestVo) throws Exception{
-        reportService.createExcel(ReportRequestVo);
-        return ResponseHelper.success();
+    public void createExcel(HttpServletRequest request, HttpServletResponse response, @RequestBody ReportRequestVo ReportRequestVo) throws Exception{
+        reportService.createExcel(request,response,ReportRequestVo);
     }
 }

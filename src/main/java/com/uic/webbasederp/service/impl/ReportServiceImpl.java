@@ -10,16 +10,18 @@ import org.apache.poi.ss.util.CellRangeAddress;
 import org.springframework.stereotype.Service;
 import sun.misc.BASE64Decoder;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.ByteArrayOutputStream;
 import java.io.FileOutputStream;
+import java.net.URLEncoder;
 import java.util.List;
 
 @Service
 public class ReportServiceImpl implements ReportService{
     @Override
-    public void createExcel(ReportRequestVo reportRequestVo) throws Exception{
+    public void createExcel(HttpServletRequest request, HttpServletResponse response, ReportRequestVo reportRequestVo) throws Exception{
         List<ReportVo> reportVos = reportRequestVo.getReportVos();
-        FileOutputStream fileOut = null;
         HSSFWorkbook wb = new HSSFWorkbook();
         HSSFCellStyle style = wb.createCellStyle();
         style.setAlignment(HSSFCellStyle.ALIGN_CENTER);
@@ -53,8 +55,13 @@ public class ReportServiceImpl implements ReportService{
             patriarch.createPicture(anchor, wb.addPicture(byteArrayOut.toByteArray(), HSSFWorkbook.PICTURE_TYPE_JPEG));
 
         }
-        fileOut = new FileOutputStream("I:\\"+reportRequestVo.getFileName()+".xls");
         // 输出文件
-        wb.write(fileOut);
+
+
+        String fileName = reportRequestVo.getFileName()+".xls";
+        response.reset();
+        response.setContentType("application/vnd.ms-excel;charset=utf-8");
+        response.setHeader("Content-Disposition", "attachment;filename="+ new String((fileName).getBytes(), "iso-8859-1"));
+        wb.write(response.getOutputStream());
     }
 }
