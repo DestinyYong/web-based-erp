@@ -14,14 +14,21 @@
         insert into erp_user
         <trim prefix="(" suffix=")">
             <if test="employeeId != null">
-                employee_id
+                employee_id,
+            </if>
+            <if test="authority != null">
+                authority
             </if>
         </trim>
 
         <trim prefix="values (" suffix=")" >
             <if test="employeeId != null">
-                #{employeeId,jdbcType=INTEGER}
+                #{employeeId,jdbcType=INTEGER},
             </if>
+            <if test="authority != null">
+                #{authority,jdbcType=VARCHAR}
+            </if>
+
         </trim>
     </insert>
 
