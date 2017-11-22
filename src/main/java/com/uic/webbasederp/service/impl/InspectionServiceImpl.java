@@ -9,6 +9,7 @@ import com.uic.webbasederp.service.InspectionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,15 +25,19 @@ public class InspectionServiceImpl implements InspectionService{
     @Override
     public void saveInspection(Inspection inspection) {
         Inspection dbInspection = inspectionMapper.getInspectionByProductId(inspection.getProductId(),inspection.getInspectDate());
+
+        DecimalFormat df=new DecimalFormat(".##");
         if(dbInspection == null){
             inspectionMapper.saveInspection(inspection);
         }
         else {
             inspection.setAcceptableNumber(inspection.getAcceptableNumber()+dbInspection.getAcceptableNumber());
-            inspection.setDefectName(dbInspection.getDefectName()+","+inspection.getDefectName());
-            inspection.setDefectDescription(dbInspection.getDefectDescription()+","+inspection.getDefectDescription());
+            inspection.setDefectName(dbInspection.getDefectName()+"<br>"+inspection.getDefectName());
+            inspection.setDefectDescription(dbInspection.getDefectDescription()+";<br>"+inspection.getDefectDescription());
             inspection.setInspectNumber(inspection.getInspectNumber()+dbInspection.getInspectNumber());
-            inspection.setAcceptableRate(inspection.getAcceptableNumber()*1.0/inspection.getInspectNumber());
+            double acceptRate = inspection.getAcceptableNumber()*1.0/inspection.getInspectNumber()*100;
+            String acceptRateStr = df.format(acceptRate);
+            inspection.setAcceptableRate(Double.parseDouble(acceptRateStr));
             inspectionMapper.updateInspection(inspection);
         }
     }

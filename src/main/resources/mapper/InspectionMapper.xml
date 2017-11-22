@@ -106,6 +106,6 @@
                 acceptable_rate = #{acceptableRate,jdbcType=DOUBLE}
             </if>
         </set>
-        where product_id = #{productId,jdbcType=INTEGER}
+        where product_id = #{productId,jdbcType=INTEGER} and inspect_date = #{inspectDate,jdbcType=VARCHAR}
     </update>
 </mapper>
