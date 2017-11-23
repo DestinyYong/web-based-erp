@@ -91,9 +91,8 @@
     </insert>
 
     <select id="listOrder" resultMap="BaseResultMap">
-        select
-        <include refid="Base_Column_List"/>
-        from erp_order order by state ASC
+        select <include refid="Base_Column_List"/> from(select <include refid="Base_Column_List"/> from erp_order order by TO_DAYS(latest_delivery_time) - TO_DAYS(create_time) ASC) as t order by t.state ASC
+
     </select>
 
     <select id="listOrderByCustomerId" resultMap="BaseResultMap">
