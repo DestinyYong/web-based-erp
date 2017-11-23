@@ -59,9 +59,11 @@ public class ReportServiceImpl implements ReportService{
 
 
         String fileName = reportRequestVo.getFileName()+".xls";
-        response.reset();
-        response.setContentType("application/vnd.ms-excel;charset=utf-8");
-        response.setHeader("Content-Disposition", "attachment;filename="+ new String((fileName).getBytes(), "iso-8859-1"));
-        wb.write(response.getOutputStream());
+        FileOutputStream fileOutputStream = new FileOutputStream("I:\\"+fileName);
+        wb.write(fileOutputStream);
+//        response.reset();
+//        response.setContentType("application/vnd.ms-excel;charset=utf-8");
+//        response.setHeader("Content-Disposition", "attachment;filename="+ new String((fileName).getBytes(), "iso-8859-1"));
+//        wb.write(response.getOutputStream());
     }
 }
